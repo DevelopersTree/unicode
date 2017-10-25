@@ -98,8 +98,8 @@
                            '\u0648', '\u06C6', '\u0647', '\u06D5', '\u06CC', '\u06CE', '\u0020'];
 
       // Check if the userinput contains any of the illigal characters
-      for (i = 0; i < standardChars.length; i++) {
-        if (userInput.indexOf(standardChars[i]) == -1) {
+      for (i = 0; i < userInput.length; i++) {
+        if (standardChars.indexOf(userInput[i]) == -1) {
           standardKeyboard = false;
           break;
         }
