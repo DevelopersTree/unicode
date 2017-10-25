@@ -99,7 +99,7 @@
 
       // Check if the userinput contains any of the illigal characters
       for (i = 0; i < standardChars.length; i++) {
-        if (userInput.indexOf(badChars[i]) == -1) {
+        if (userInput.indexOf(standardChars[i]) == -1) {
           standardKeyboard = false;
           break;
         }
