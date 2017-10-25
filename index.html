@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="favicon.png">
+
+  <title>تاقیکردنەوەی تەختەکلیلی یونیکۆد</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/narrow-jumbotron.css" rel="stylesheet">
+
+  <!-- Custom styles for this site -->
+  <link href="css/site.css" rel="stylesheet">
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body dir="rtl">
+
+  <div class="container">
+    <header class="header clearfix">
+      <h3 class="text-muted">تاقیکردنەوەی یونیکۆد</h3>
+      <nav>
+        <ul class="nav nav-pills float-right">
+          <li class="nav-item">
+            <a class="nav-link" href="http://developerstree.com/">زانیاری زۆرتر</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main role="main">
+
+      <div class="jumbotron" id="result">
+        <h1 class="display-5">بزانە تەختەکلیلەکەت ستانداردە؟</h1>
+        <p class="lead">بۆ ئەوەی بزانی ئەو تەختەکلیلەی بەکاری دەهێنی ستانداردە یان نا، ئەو پەندەی خوارەوە لە بۆکسەکەدا بنووسە:
+        </p>
+        <p class="lead proverb" id="proverb"></p>
+
+        <div class="form-group">
+          <input id="input" type="text" class="form-control" placeholder="پەندەکەی سەرەوە لێرە بنووسەوە..." aria-describedby="basic-addon1">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg" id="check">پشکنین</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>&copy;
+        <a href="http://developerstree.com/">Developers Tree</a> 2017</p>
+    </footer>
+
+  </div>
+  <!-- /container -->
+</body>
+<script>
+  $(document).ready(function () {
+
+    // Invoke check button when pressing enter inside textbox
+    $('#input').keypress(function (e) {
+      if (e.keyCode == 13)
+        $('#check').click();
+    });
+
+    // Show a random proverb
+    var proverbs = ["ئیشی بەپینەو پەڕۆ ھەر دەگاتە نیوەڕۆ",
+      "لە ھەموو ھەورێک باران نابارێت",
+      "ساڵی خۆش لە بەھارەکەیدا دیارە",
+      "بار بە لاباران قەت ناگاتە ھەواران",
+      "دەنگی دەھۆڵ لە دوور خۆشە"
+    ];
+
+    var index = Math.floor((Math.random() * proverbs.length));
+    $("#proverb").text(proverbs[index]);
+
+    // Check keyboard
+    $("#check").click(function () {
+
+      var userInput = $("#input").val();
+      var standardKeyboard = true;
+
+      if (userInput.length == 0) {
+        alert('تکایە پەندەکە لە بۆکسەکە بنووسە');
+        return;
+      }
+
+      // Characters that non-standard Kurdish keyboards use
+      var badChars = ['\u064E', '\u0623', '\u0622', '\u0636', '\u062B', '\u0638', '\u064A', '\u0629', '\u0635',
+        '\u0649', '\u0650', '\u0624', '\u0630', '\u0643', '\u06BE', '\u200C', '\u0637'
+      ];
+
+      // Check if the userinput contains any of the illigal characters
+      for (i = 0; i < badChars.length; i++) {
+        if (userInput.indexOf(badChars[i]) >= 0) {
+          standardKeyboard = false;
+          break;
+        }
+      }
+
+      if (standardKeyboard)
+        $("#result").load('good.html');
+      else
+        $("#result").load('bad.html');
+
+    });
+  });
+</script>
+
+</html>
