@@ -21,6 +21,9 @@
 
   <!-- JQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Custom scripts for this site -->
+  <script src="js/site.js"></script>
 </head>
 
 <body dir="rtl">
@@ -53,9 +56,11 @@
     </main>
 
     <footer class="footer">
-      <p>&copy;
-        <a href="http://developerstree.com/">Developers Tree</a> 2017</p>
-    </footer>
+      <p>
+          پڕۆژەیەکی
+        <a href="https://github.com/DevelopersTree/unicode">سەرچاوەکراوە</a>ی  
+        <a href="http://developerstree.com/">درەختی گەشەپێدەرانە</a></p>
+      </footer>
 
   </div>
   <!-- /container -->
@@ -70,46 +75,34 @@
     });
 
     // Show a random proverb
-    var proverbs = ["ئیشی بەپینەو پەڕۆ هەر دەگاتە نیوەڕۆ",
-      "لە هەموو هەورێک باران نابارێت",
-      "ساڵی خۆش لە بەهارەکەیدا دیارە",
-      "بار بە لاباران قەت ناگاتە هەواران",
-      "دەنگی دەهۆڵ لە دوور خۆشە"
-    ];
-
-    var index = Math.floor((Math.random() * proverbs.length));
-    $("#proverb").text(proverbs[index]);
+    $("#proverb").text(getRandomProverb());
 
     // Check keyboard
     $("#check").click(function () {
 
       var userInput = $("#input").val();
-      var standardKeyboard = true;
 
       if (userInput.length == 0) {
         alert('تکایە پەندەکە لە بۆکسەکە بنووسە');
         return;
       }
 
-      // Standard Kurdish characters
-      var standardChars = ['\u0626', '\u0627', '\u0628', '\u067E', '\u062A', '\u062C', '\u0686', '\u062D', '\u062E',
-                           '\u062F', '\u0631', '\u0695', '\u0632', '\u0698', '\u0633', '\u0634', '\u0639', '\u063A',
-                           '\u0641', '\u06A4', '\u0642', '\u06A9', '\u06AF', '\u0644', '\u06B5', '\u0645', '\u0646',
-                           '\u0648', '\u06C6', '\u0647', '\u06D5', '\u06CC', '\u06CE', '\u0020'];
-
-      // Check if the userinput contains any of the illigal characters
-      for (i = 0; i < userInput.length; i++) {
-        if (standardChars.indexOf(userInput[i]) == -1) {
-          standardKeyboard = false;
-          break;
-        }
+      if (userInput.length > 50) {
+        alert('پێویست ناکات زیاتر لە ٥٠ پیت بنووسیت');
+        return;
       }
 
-      if (standardKeyboard)
-        $("#result").load('good.html');
-      else
-        $("#result").load('bad.html');
+      var characterResults = getCharacterResults(userInput);
+      var isUsingStandardKeyboard = checkStandardKeyboard(characterResults);
 
+      if (isUsingStandardKeyboard) {
+        $("#result").load('good.html');
+      } else {
+        $("#result").load('bad.html', function () {
+          var colorCoded = colorizeSentence(userInput, characterResults);
+          $("#colorized").html(colorCoded);
+        });
+      }
     });
   });
 </script>
