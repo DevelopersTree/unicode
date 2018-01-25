@@ -36,3 +36,8 @@ body {
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
+
+#again {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
