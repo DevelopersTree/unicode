@@ -23,7 +23,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Custom scripts for this site -->
-  <script src="js/site.js"></script>
+  <script src="js/unicode.js"></script>
+  <script src="js/display.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108843322-1"></script>
@@ -63,7 +64,7 @@
         <p class="lead proverb" id="proverb"></p>
 
         <div class="form-group">
-          <input id="input" type="text" class="form-control" placeholder="پەندەکەی سەرەوە لێرە بنووسەوە..." aria-describedby="basic-addon1">
+          <input id="input" type="text" class="form-control" maxlength="50" placeholder="پەندەکەی سەرەوە لێرە بنووسەوە..." aria-describedby="basic-addon1">
         </div>
         <button type="button" class="btn btn-primary btn-lg" id="check">پشکنین</button>
       </div>
@@ -80,46 +81,5 @@
   </div>
   <!-- /container -->
 </body>
-<script>
-  $(document).ready(function () {
-
-    // Invoke check button when pressing enter inside textbox
-    $('#input').keypress(function (e) {
-      if (e.keyCode == 13)
-        $('#check').click();
-    });
-
-    // Show a random proverb
-    $("#proverb").text(getRandomProverb());
-
-    // Check keyboard
-    $("#check").click(function () {
-
-      var userInput = $("#input").val();
-
-      if (userInput.length == 0) {
-        alert('تکایە پەندەکە لە بۆکسەکە بنووسە');
-        return;
-      }
-
-      if (userInput.length > 50) {
-        alert('پێویست ناکات زیاتر لە ٥٠ پیت بنووسیت');
-        return;
-      }
-
-      var characterResults = getCharacterResults(userInput);
-      var isUsingStandardKeyboard = checkStandardKeyboard(characterResults);
-
-      if (isUsingStandardKeyboard) {
-        $("#result").load('good.html');
-      } else {
-        $("#result").load('bad.html', function () {
-          var colorCoded = colorizeSentence(userInput, characterResults);
-          $("#colorized").html(colorCoded);
-        });
-      }
-    });
-  });
-</script>
 
 </html>
