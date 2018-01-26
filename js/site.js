@@ -82,13 +82,13 @@ function renderInstructions(os) {
     var systems = [{
             id: "iOS",
             title: "ئایفۆن و ئایپاد",
-            youtube: "v75XQdrr_6Y",
+            youtube: "yDlJ_NHgav4",
             text: "<a target='_blank' href='https://itunes.apple.com/us/app/kurdish-keyboard/id928647744?mt=8'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
         },
         {
             id: "Windows 10",
             title: "ویندۆز ١٠",
-            youtube: "v75XQdrr_6Y",
+            youtube: "yJTjKCdfIe4",
             text: ""
         },
         {
