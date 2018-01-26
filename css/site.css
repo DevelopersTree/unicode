@@ -24,6 +24,10 @@ body {
     border-bottom: 0.1rem solid red;
 }
 
+ul {
+    text-align: right
+}
+
 .good {
     color: #555;
 }

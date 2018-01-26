@@ -77,48 +77,109 @@ function colorizeSentence(userInput, characterResults) {
     return colorized;
 }
 
-function getTestReady(){
+function renderInstructions(os) {
+
+    var systems = [{
+            id: "iOS",
+            title: "ئایفۆن و ئایپاد",
+            youtube: "v75XQdrr_6Y",
+            text: "<a target='_blank' href='https://itunes.apple.com/us/app/kurdish-keyboard/id928647744?mt=8'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
+        },
+        {
+            id: "Windows 10",
+            title: "ویندۆز ١٠",
+            youtube: "v75XQdrr_6Y",
+            text: ""
+        },
+        {
+            id: "Mac",
+            title: "ماک",
+            youtube: "-5h921IKzFw",
+            text: ""
+        }
+    ];
+    console.log(os);
+    var currentSys = systems.find(function (s) {
+        return s.id === os
+    });
+
+    var instructions = '';
+    if (currentSys == undefined)
+    {
+        instructions = '<h4>کیبۆڕدی ستاندارد دابەزێنە:</h4><ul>';
+    }
+    else
+    {
+        instructions = `<h4>چۆنییەتی دانانی کیبۆڕدی ستاندارد بۆ ${currentSys.title}</h4>
+        <p>${currentSys.text}</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${currentSys.youtube}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <hr/>
+        <h4>بۆ سیستەمەکانی دیکە</h4>
+        <ul>`;
+    }
+
+    for (var i in systems) {
+        var sys = systems[i];
+
+        instructions += `<li><a target='_blank' href='https://www.youtube.com/watch?v=${sys.youtube}'>${sys.title}</li>`;
+    }
+
+    instructions += '</ul>';
+
+    return instructions;
+}
+
+function getTestReady(window) {
+    $("#instructions").removeClass("jumbotron");
+    $("#instructions").html("");
+
     // Invoke check button when pressing enter inside textbox
     $('#input').keypress(function (e) {
-      if (e.keyCode == 13)
-        $('#check').click();
+        if (e.keyCode == 13)
+            $('#check').click();
     });
-  
+
     // Show a random proverb
     $("#proverb").text(getRandomProverb());
-  
+
     // Check keyboard
     $("#check").click(function () {
-  
-      var userInput = $("#input").val();
-  
-      if (userInput.length == 0) {
-        alert('تکایە پەندەکە لە بۆکسەکە بنووسە');
-        return;
-      }
-  
-      if (userInput.length > 50) {
-        alert('پێویست ناکات زیاتر لە ٥٠ پیت بنووسیت');
-        return;
-      }
-  
-      var characterResults = getCharacterResults(userInput);
-      var isUsingStandardKeyboard = checkStandardKeyboard(characterResults);
-  
-      if (isUsingStandardKeyboard) {
-        $("#result").load('good.html', function() {
-          $("#again").click(function (){
-            $("#result").load("test.html", getTestReady);
-          })
-        });
-      } else {
-        $("#result").load('bad.html', function () {
-          var colorCoded = colorizeSentence(userInput, characterResults);
-          $("#colorized").html(colorCoded);
-          $("#again").click(function (){
-            $("#result").load("test.html", getTestReady);
-          })
-        });
-      }
+
+        var userInput = $("#input").val();
+
+        if (userInput.length == 0) {
+            alert('تکایە پەندەکە لە بۆکسەکە بنووسە');
+            return;
+        }
+
+        if (userInput.length > 50) {
+            alert('پێویست ناکات زیاتر لە ٥٠ پیت بنووسیت');
+            return;
+        }
+
+        var characterResults = getCharacterResults(userInput);
+        var isUsingStandardKeyboard = checkStandardKeyboard(characterResults);
+
+        if (isUsingStandardKeyboard) {
+            $("#result").load('good.html', function () {
+                $("#again").click(function () {
+                    $("#result").load("test.html", getTestReady);
+                })
+            });
+        } else {
+            $("#result").load('bad.html', function () {
+                var colorCoded = colorizeSentence(userInput, characterResults);
+                $("#colorized").html(colorCoded);
+
+                var os = getOperatingSystem(window);
+
+                var instructions = renderInstructions(os);
+                $("#instructions").html(instructions);
+                $("#instructions").addClass("jumbotron");
+                $("#again").click(function () {
+                    $("#result").load("test.html", getTestReady);
+                })
+            });
+        }
     });
-  }
+}

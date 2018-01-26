@@ -24,6 +24,7 @@
 
   <!-- Custom scripts for this site -->
   <script src="js/site.js"></script>
+  <script src="js/client-info.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108843322-1"></script>
@@ -59,6 +60,8 @@
       <div class="jumbotron" id="result">
 
       </div>
+
+      <div id="instructions"></div>
     </main>
 
     <footer class="footer">
@@ -75,7 +78,7 @@
 
 <script>
   $(document).ready(function () {
-    $("#result").load("test.html", getTestReady)
+    $("#result").load("test.html", function() { getTestReady(window) })
   });
 </script>
 
