@@ -101,7 +101,7 @@ function renderInstructions(os) {
             id: "Windows",
             title: "ویندۆز ئێکسپی، ڤێستا، ٧ و ٨",
             youtube: "EghP0s4hzww",
-            text: ""
+            text: "<a target='_blank' href='http://unicode.ekrg.org/download.html'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
         }
     ];
     console.log(os);
