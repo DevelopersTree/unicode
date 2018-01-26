@@ -8,6 +8,8 @@ function getOperatingSystem(window) {
         var nAgt = navigator.userAgent;
         var nVer = navigator.appVersion;
         var os = unknown;
+        
+        console.log(nAgt);
 
         var clientStrings = [
             {s:'Windows 10', r:/(Windows 10.0|Windows NT 10.0)/},

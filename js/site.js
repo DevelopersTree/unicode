@@ -96,12 +96,26 @@ function renderInstructions(os) {
             title: "ماک",
             youtube: "-5h921IKzFw",
             text: ""
+        },
+        {
+            id: "Windows",
+            title: "ویندۆز ئێکسپی، ڤێستا، ٧ و ٨",
+            youtube: "EghP0s4hzww",
+            text: ""
         }
     ];
     console.log(os);
     var currentSys = systems.find(function (s) {
         return s.id === os
     });
+
+    // this one is for windows versions prior to windows 10
+    if (currentSys == undefined)
+    {
+        currentSys = systems.find(function (s) {
+                return os.includes(s.id);
+        });
+    }
 
     var instructions = '';
     if (currentSys == undefined)
@@ -112,7 +126,9 @@ function renderInstructions(os) {
     {
         instructions = `<h4>چۆنییەتی دانانی کیبۆڕدی ستاندارد بۆ ${currentSys.title}</h4>
         <p>${currentSys.text}</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/${currentSys.youtube}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/${currentSys.youtube}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
         <hr/>
         <h4>بۆ سیستەمەکانی دیکە</h4>
         <ul>`;
