@@ -110,6 +110,7 @@ function renderInstructions(os) {
             text: "<a target='_blank' href='https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin&hl=en'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
         }
     ];
+
     console.log(os);
     var currentSys = systems.find(function (s) {
         return s.id === os
@@ -143,6 +144,9 @@ function renderInstructions(os) {
     for (var i in systems) {
         var sys = systems[i];
 
+        if (sys.id == currentSys.id)
+            continue;
+            
         instructions += `<li><a target='_blank' href='https://www.youtube.com/watch?v=${sys.youtube}'>${sys.title}</li>`;
     }
 
