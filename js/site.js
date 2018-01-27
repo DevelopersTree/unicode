@@ -102,6 +102,12 @@ function renderInstructions(os) {
             title: "ویندۆز ئێکسپی، ڤێستا، ٧ و ٨",
             youtube: "EghP0s4hzww",
             text: "<a target='_blank' href='http://unicode.ekrg.org/download.html'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
+        },
+        {
+            id: "Android",
+            title: "ئەندرۆید",
+            youtube: "cjbkXDWPl4o",
+            text: "<a target='_blank' href='https://play.google.com/store/apps/details?id=com.google.android.inputmethod.latin&hl=en'>لینکی دابەزاندنی کیبۆڕدی کوردی</a>"
         }
     ];
     console.log(os);
