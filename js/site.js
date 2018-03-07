@@ -94,8 +94,8 @@ function renderInstructions(os) {
         {
             id: "Mac",
             title: "ماک",
-            youtube: "-5h921IKzFw",
-            text: ""
+            youtube: "",
+            text: "<a target='_blank' href='https://www.kurditgroup.org/download/1334/'>لینکی دابەزاندنی کیبۆڕدی کوردی</a><p>هێشتا ڤیدیۆ ئامادە نییە لەسەر چۆنییەتی دامەزراندنی تەختەکلیلی ماک. ئەگەر ڤیدیۆیەکی باشت هەیە، تکایە بۆمان بنێرە.</p> <p><b>تێبینی:</b> تەختەکلیلی ڕەسمیی کوردیی ناوەندیی ماک ستاندارد نییە!</p>"
         },
         {
             id: "Windows",
@@ -125,17 +125,24 @@ function renderInstructions(os) {
     }
 
     var instructions = '';
+
     if (currentSys == undefined)
     {
         instructions = '<h4>کیبۆڕدی ستاندارد دابەزێنە:</h4><ul>';
     }
     else
     {
+        var youtubeVideo = '';
+        if (currentSys.youtube.length > 0)
+        {
+            youtubeVideo = `<div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/${currentSys.youtube}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>`;
+        } 
+
         instructions = `<h4>چۆنییەتی دانانی کیبۆڕدی ستاندارد بۆ ${currentSys.title}</h4>
         <p>${currentSys.text}</p>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/${currentSys.youtube}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
+        ${youtubeVideo}
         <hr/>
         <h4>بۆ سیستەمەکانی دیکە</h4>
         <ul>`;
