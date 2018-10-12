@@ -151,7 +151,7 @@ function renderInstructions(os) {
     for (var i in systems) {
         var sys = systems[i];
 
-        if (sys.id == currentSys.id)
+        if (sys.id == currentSys.id || !sys.youtube)
             continue;
             
         instructions += `<li><a target='_blank' href='https://www.youtube.com/watch?v=${sys.youtube}'>${sys.title}</li>`;
